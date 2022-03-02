@@ -1,31 +1,98 @@
 class sort{
-    
-    Descending(numbers = null){
-        let res = [];
+    constructor(){
+        this.res = [];
+    }
 
-        console.log('Numbers', numbers, '\nRes', res);
-        for(let i = 0; i < numbers.length; i++){
-            let verifRes = [];
 
-            for(let y = 0; y<numbers.length; y++){
+    Descending(ArrNumbers = null){
+        let numbers = ArrNumbers;
+        let ResVeriFyNumber = this.VerifyNumber(589, numbers);
 
-                if(numbers[i] != numbers[y]){
+        console.log('Numbers', numbers, '\nRes', this.res);
 
-                    if(numbers[i] > numbers[y] == false){
-                        verifRes.push({[i]: [false, y]});
+        if(ResVeriFyNumber.res){
 
-                        // console.log('number',numbers[i], 'false', numbers[y]);
-                    }
+            if(ResVeriFyNumber.info != 'finish'){
+                console.log('passou', 'Numero: ', ResVeriFyNumber.info);
+                update_numbers(ResVeriFyNumber.info[0]);
+                repeat(ResVeriFyNumber.info[0], ResVeriFyNumber.info[1]);
+                // let teste = this.VerifyNumber(numbers[0], numbers);
+                // console.log(teste);
+            }
+            
+        }
 
-                    if(numbers[i] > numbers[y]){
-                        verifRes.push({[i]: [true, y]});
-                        // console.log('number',numbers[i], 'false', numbers[y]);
-                    }
-                }
+        if(!ResVeriFyNumber.res){
+            console.log('n passou , Numero: ', ResVeriFyNumber.info[1]);
+            let teste = this.VerifyNumber(ResVeriFyNumber.info[1], numbers);
+            console.log(teste);
+        }
+
+        // repete a logica de verificação 
+
+        function repeat(NumberPassed = null, NextNumber = null){
+            console.log('repeat: ', NumberPassed, NextNumber, '\n O arr atualizado: ', numbers);
+
+        }
+
+        function update_numbers(number_deleted) {
+            for (let index = 0; index < numbers.length; index++) {
+                number_deleted == numbers[index] && numbers.splice(1, index);  
             }
         }
 
     }
+    
+    VerifyNumber(number, arrNumbers){
+        let res;
+        let estado = [];
+
+        for(let j = 0; j < arrNumbers.length; j++){
+
+            if(number != arrNumbers[j]){
+
+                if(number < arrNumbers[j]){
+                    estado.push({number: number, res: [true, arrNumbers[j]]});
+                }
+    
+                if(number > arrNumbers[j]){
+                    estado.push({number: number, res: [false, arrNumbers[j]]})
+                }
+
+            }
+            
+        }
+        let guardaErrados = [];
+        
+        for(let k = 0; k<estado.length; k++){
+            estado[k].res[0] == false && guardaErrados.push(estado[k].res)
+        }
+
+        if(guardaErrados[0] == undefined) {
+            let newNumbers = arrNumbers;
+            
+            for(let l = 0; l < newNumbers.length; l++){
+                arrNumbers[l] == number && arrNumbers.splice(1, l);
+            }
+
+            if(newNumbers.length > 2){
+                res = {res: true, info: [number, newNumbers[0]]};
+            }
+
+            if(newNumbers.length <= 2){
+                res = {res: true, info: 'finish'};
+            }
+
+        }
+        else {
+            if(guardaErrados[0][0] == false){
+                res = {res: false, info: guardaErrados[0]};
+            }
+        }
+
+        return res;
+    }
+
 }
 
 module.exports = sort;
