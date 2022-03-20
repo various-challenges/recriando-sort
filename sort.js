@@ -3,7 +3,7 @@ class sort{
         let res = [];
         let arr_atualizado = ArrNumbers;
 
-        loop_verif( arr_atualizado[0], arr_atualizado); // chamada que faz começar o loop
+        loop_verif( arr_atualizado[0], arr_atualizado ); // chamada que faz começar o loop
         
         function loop_main(dados, arr_att){
             //caso retorne true
@@ -12,14 +12,14 @@ class sort{
 
                 //logica para deletar ele do array do qual usamos para veficações
                 for(let y = 0; y < arr_atualizado.length; y++){
-                if(dados[1] == arr_atualizado[y]){
-                    arr_atualizado.splice(y, 1) //deleta um numero especifico
-                }
+                    if(dados[1] == arr_atualizado[y]){
+                        arr_atualizado.splice(y, 1) //deleta um numero especifico
+                    }
                 }
 
                 //logica para retomar o loop
                 if(arr_atualizado.length > 1){
-                loop_verif( arr_atualizado[0], arr_atualizado )
+                    loop_verif( arr_atualizado[0], arr_atualizado )
                 }
             }
 
@@ -37,7 +37,7 @@ class sort{
           
             //logica de verificação e salvamento no array do guarda_valores
             for(let i = 1; i < arr_att.length; i++){
-              if(number > arr_att[i]){ //caso queira passar a logica de organização crescente para decrescente, altere o sinal (>) para (<)
+              if(number < arr_att[i]){ //caso queira passar a logica de organização crescente para decrescente, altere o sinal (>) para (<)
                 guarda_valores.push({
                   numero: number,
                   foiMaior: arr_att[i]
@@ -56,8 +56,9 @@ class sort{
           
           //quando toda o logica termina e mostra o resultado para o user
           res.push(arr_atualizado[0]);
-          console.log('saída: ', res.join(', '));
+          return res.join(', ');
     }
+
 }
 
 module.exports = sort;
