@@ -6,7 +6,7 @@ function geraNumbers(quant){
 
     for(let y = 0; y < number.length; y++){
         if(number[y] == 0 || number[y] == 1){
-            number[y] = Math.floor(Math.random() * 1000) + 10
+            number[y] = Math.floor(Math.random() * 10000) + 10
         }
     }
 
